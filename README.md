@@ -1,122 +1,117 @@
-![fname banner](.github/media/fname_banner_1.1_1280x640.png)
+# fnombre
 
-# fname
+Este es un fork rápido y sucio en español de https://github.com/Splode/fname.
 
-Generate random, human-friendly names, like `determined-pancake` or `sinister discovery`. fname is like a grammatically aware diceware generator for unique names or identifiers.
+Genera nombres aleatorios y fáciles de recordar, como `determinado-panqueque` o `descubrimiento siniestro`. fnombre es como un *diceware* gramaticalmente consciente para nombres o identificadores únicos.
 
-fname isn't meant to provide a secure, globally unique identifier, but with over 500 billion possible combinations, it's good enough for most non-critical use cases.
+fnombre no pretende proporcionar un identificador seguro y único a nivel global, pero con más de 500 mil millones de combinaciones posibles, es suficientemente bueno para la mayoría de los casos de uso no críticos.
 
-## Table of Contents
+## Tabla de Contenidos
 
-- [fname](#fname)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-    - [Download](#download)
+- [fnombre](#fnombre)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Instalación](#instalación)
     - [Go](#go)
-    - [Source](#source)
-  - [Usage](#usage)
+    - [Fuente](#fuente)
+  - [Uso](#uso)
     - [CLI](#cli)
-    - [Library](#library)
-      - [Install](#install)
-      - [Basic Usage](#basic-usage)
-      - [Customization](#customization)
-  - [Disclaimers](#disclaimers)
-  - [Contributing](#contributing)
-    - [Reporting Issues](#reporting-issues)
-    - [Suggesting Improvements](#suggesting-improvements)
-  - [License](#license)
-  - [Related Projects](#related-projects)
+    - [Librería](#librería)
+      - [Instalación](#instalación-1)
+      - [Uso Básico](#uso-básico)
+      - [Personalización](#personalización)
+  - [Descargos de Responsabilidad](#descargos-de-responsabilidad)
+  - [Contribuciones](#contribuciones)
+    - [Reportar Problemas](#reportar-problemas)
+    - [Sugerir Mejoras](#sugerir-mejoras)
+  - [Licencia](#licencia)
+  - [Proyectos Relacionados](#proyectos-relacionados)
 
-## Installation
-
-### Download
-
-Download the latest release from the [releases page](https://github.com/Splode/fname/releases).
+## Instalación
 
 ### Go
 
 ```sh
-go install github.com/splode/fname/cmd/fname@latest
+go install github.com/bumper314/fnombre/cmd/fnombre@latest
 ```
 
-### Source
+### Fuente
 
 ```sh
-git clone https://github.com/splode/fname.git
-cd fname
-go install ./cmd/fname
+git clone https://github.com/bumper314/fnombre.git
+cd fnombre
+go install ./cmd/fnombre
 ```
 
-## Usage
+## Uso
 
 ### CLI
   
-Generate a single, random name phrase:
+Genera una sola frase de nombre aleatoria:
 
 ```sh
-$ fname
-extinct-green
+$ fnombre
+extinto-verde
 ```
 
-Generate multiple name phrases, passing the number of names as an argument:
+Genera múltiples frases de nombre, pasando el número de nombres como argumento:
 
 ```sh
-$ fname --quantity 3
-influential-length
-direct-ear
-cultural-storage
+$ fnombre --quantity 3
+influente-longitud
+directo-oído
+almacenamiento-cultural
 ```
 
-Generate a name phrase with a custom delimiter:
+Genera una frase de nombre con un delimitador personalizado:
 
 ```sh
-$ fname --delimiter "__"
-glaring__perception
+$ fnombre --delimiter "__"
+llamativa__percepción
 ```
 
-Generate a name phrase with more words:
+Genera una frase de nombre con más palabras:
 
 ```sh
-$ fname --size 3
-vengeful-toy-identified
+$ fnombre --size 3
+vengativo-juguete-identificado
 
-$ fname --size 4
-spellbinding-project-presented-fully
+$ fnombre --size 4
+hechizante-proyecto-presentado-completamente
 ```
 
-Note: the minimum phrase size is 2 (default), and the maximum is 4.
+Nota: el tamaño mínimo de la frase es 2 (predeterminado), y el máximo es 4.
 
-Generate a name phrase with a specific casing:
+Genera una frase de nombre con un formato específico:
 
 ```sh
-$ fname --casing upper
-TRAGIC-MOUNTAIN
+$ fnombre --casing upper
+TRÁGICA-MONTAÑA
 
-$ fname --casing title
-Whimsical-Party
+$ fnombre --casing title
+Fiesta-Caprichosa
 ```
 
-Specify the seed for generating names:
+Especifica la semilla para generar nombres:
 
 ```sh
-$ fname --seed 123 --quantity 2
-pleasant-joy
-eligible-tenant
+$ fnombre --seed 123 --quantity 2
+alegre-gozo
+inquilino-elegible
 
-$ fname --seed 123 --quantity 2
-pleasant-joy
-eligible-tenant
+$ fnombre --seed 123 --quantity 2
+alegre-gozo
+inquilino-elegible
 ```
 
-### Library
+### Librería
 
-#### Install
+#### Instalación
 
 ```sh
-go get github.com/splode/fname
+go get github.com/bumper314/fnombre
 ```
 
-#### Basic Usage
+#### Uso Básico
 
 ```go
 package main
@@ -124,18 +119,18 @@ package main
 import (
   "fmt"
 
-  "github.com/splode/fname"
+  "github.com/bumper314/fnombre"
 )
 
 func main() {
-  rng := fname.NewGenerator()
+  rng := fnombre.NewGenerator()
   phrase, err := rng.Generate()
   fmt.Println(phrase)
-  // => "influential-length"
+  // => "influente-longitud"
 }
 ```
 
-#### Customization
+#### Personalización
 
 ```go
 package main
@@ -143,51 +138,49 @@ package main
 import (
   "fmt"
 
-  "github.com/splode/fname"
+  "github.com/bumper314/fnombre"
 )
 
 func main() {
-  rng := fname.NewGenerator(fname.WithDelimiter("__"), fname.WithSize(3))
+  rng := fnombre.NewGenerator(fnombre.WithDelimiter("__"), fnombre.WithSize(3))
   phrase, err := rng.Generate()
   fmt.Println(phrase)
-  // => "established__shark__destroyed"
+  // => "establecido__tiburón__destruido"
 }
 ```
 
-## Disclaimers
+## Descargos de Responsabilidad
 
-fname is not cryptographically secure, and should not be used for anything that requires a truly unique identifier. It is meant to be a fun, human-friendly alternative to UUIDs.
+fnombre no es seguro criptográficamente, y no debe ser utilizado para nada que requiera un identificador verdaderamente único. Está destinado a ser una alternativa divertida y fácil de recordar a los UUIDs.
 
-fname's dictionary is curated to exclude words that are offensive, or could be considered offensive, either alone or when generated in a phrase. Nevertheless, all cases are not and cannot be covered. If you find a word that you think should be removed, please [open an issue](https://github.com/Splode/fname/issues).
+El diccionario de fnombre está curado para excluir palabras que sean ofensivas, o que puedan considerarse ofensivas, ya sea solas o cuando se generen en una frase. Sin embargo, no todos los casos están ni pueden estar cubiertos. Si encuentras una palabra que piensas que debería ser eliminada, por favor [abre un problema](https://github.com/bumper314/fnombre/issues).
 
-## Contributing
+## Contribuciones
 
-We welcome contributions to the fname project! Whether it's reporting bugs, suggesting improvements, or submitting new features, your input is valuable to us. Here's how you can get started:
+¡Damos la bienvenida a las contribuciones al proyecto fnombre! Ya sea reportando errores, sugiriendo mejoras o enviando nuevas características, tu aporte es valioso para nosotros. Aquí te mostramos cómo puedes comenzar:
 
-1. Fork the repository on GitHub.
-2. Clone your fork and create a new branch for your changes.
-3. Make your changes and commit them to your branch.
-4. Create a pull request, and provide a clear description of your changes.
+1. Haz un fork del repositorio en GitHub.
+2. Clona tu fork y crea una nueva rama para tus cambios.
+3. Realiza tus cambios y haz commit en tu rama.
+4. Crea una solicitud de pull, y proporciona una descripción clara de tus cambios.
 
-Before submitting a pull request, please make sure your changes are well-tested and adhere to the code style used throughout the project. If you are unsure how to proceed or need help, feel free to open an issue or ask a question in the [discussions](https://github.com/Splode/fname/discussions) section.
+Antes de enviar una solicitud de pull, por favor asegúrate de que tus cambios estén bien probados y se adhieran al estilo de código utilizado en todo el proyecto. Si no estás seguro de cómo proceder o necesitas ayuda, no dudes en abrir un problema o hacer una pregunta en la sección de [discusiones](https://github.com/bumper314/fnombre/discussions).
 
-### Reporting Issues
+### Reportar Problemas
 
-If you encounter a bug or any issue, please [open an issue](https://github.com/Splode/fname/issues) on GitHub. When reporting a bug, try to include as much information as possible, such as the steps to reproduce the issue, the expected behavior, and the actual behavior. This will help us diagnose and fix the issue more efficiently.
+Si encuentras un error o cualquier problema, por favor [abre un problema](https://github.com/bumper314/fnombre/issues) en GitHub. Al reportar un error, trata de incluir tanta información como sea posible, como los pasos para reproducir el problema, el comportamiento esperado y el comportamiento actual. Esto nos ayudará a diagnosticar y solucionar el problema de manera más eficiente.
 
-### Suggesting Improvements
+### Sugerir Mejoras
 
-We are always looking for ways to improve fname. If you have a suggestion for a new feature or an enhancement to an existing feature, please [open an issue](https://github.com/Splode/fname/issues) or start a discussion in the [discussions](https://github.com/Splode/fname/discussions) section. Be sure to explain your idea in detail, and if possible, provide examples or use cases.
+Siempre estamos buscando formas de mejorar fnombre. Si tienes una sugerencia para una nueva característica o una mejora a una característica existente, por favor [abre un problema](https://github.com/bumper314/fnombre/issues) o inicia una discusión en la sección de [discusiones](https://github.com/bumper314/fnombre/discussions). Asegúrate de explicar tu idea en detalle, y si es posible, proporciona ejemplos o casos de uso.
 
-Thank you for your interest in contributing to fname!
+¡Gracias por tu interés en contribuir a fnombre!
 
+## Licencia
 
+[Licencia MIT](./LICENSE)
 
-## License
-
-[MIT License](./LICENSE)
-
-## Related Projects
+## Proyectos Relacionados
 
 - [go-diceware](https://github.com/sethvargo/go-diceware)
 - [wordnet-random-name](https://github.com/kohsuke/wordnet-random-name)

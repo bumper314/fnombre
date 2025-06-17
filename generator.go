@@ -1,4 +1,4 @@
-package fname
+package fnombre
 
 import (
 	"fmt"
@@ -105,20 +105,35 @@ func (g *Generator) Generate() (string, error) {
 	}
 
 	words := make([]string, 0, g.size)
-	adjectiveIndex := g.rand.Intn(g.dict.LengthAdjective())
-	nounIndex := g.rand.Intn(g.dict.LengthNoun())
-	for adjectiveIndex == nounIndex {
-		nounIndex = g.rand.Intn(g.dict.LengthNoun())
-	}
 
-	words = append(words, g.dict.adjectives[adjectiveIndex], g.dict.nouns[nounIndex])
+	// Select a random noun
+	nounIndex := g.rand.Intn(g.dict.LengthNoun())
+	noun := g.dict.nouns[nounIndex]
+
+	// Select a matching adjective
+	adjectiveIndex := g.rand.Intn(g.dict.LengthAdjective())
+	for !g.dict.adjectives[adjectiveIndex].Matches(noun) {
+		adjectiveIndex = g.rand.Intn(g.dict.LengthAdjective())
+	}
+	adjective := g.dict.adjectives[adjectiveIndex]
+
+	// Add the noun first, followed by the adjective
+	words = append(words, noun.Text, adjective.Text)
 
 	if g.size >= 3 {
-		words = append(words, g.dict.verbs[g.rand.Intn(g.dict.LengthVerb())])
+		// Add a matching verb
+		verbIndex := g.rand.Intn(g.dict.LengthVerb())
+		for !g.dict.verbs[verbIndex].Matches(noun) {
+			verbIndex = g.rand.Intn(g.dict.LengthVerb())
+		}
+		verb := g.dict.verbs[verbIndex]
+		words = append(words, verb.Text)
 	}
 
 	if g.size == 4 {
-		words = append(words, g.dict.adverbs[g.rand.Intn(g.dict.LengthAdverb())])
+		// Add an adverb
+		adverb := g.dict.adverbs[g.rand.Intn(g.dict.LengthAdverb())]
+		words = append(words, adverb.Text)
 	}
 
 	return strings.Join(g.applyCasing(words), g.delimiter), nil

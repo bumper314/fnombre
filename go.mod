@@ -1,4 +1,4 @@
-module github.com/splode/fname
+module github.com/bumper314/fnombre
 
 go 1.19
 

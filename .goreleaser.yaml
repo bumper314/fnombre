@@ -2,8 +2,8 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - main: ./cmd/fname
-    binary: fname
+  - main: ./cmd/fnombre
+    binary: fnombre
     env:
       - CGO_ENABLED=0
     goos:

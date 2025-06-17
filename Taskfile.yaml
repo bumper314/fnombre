@@ -8,9 +8,9 @@ vars:
     sh: git describe --tags --abbrev=0
 tasks:
   install:
-    desc: Installs fname
+    desc: Installs fnombre
     cmds:
-      - go install -v -ldflags "-w -s -X main.version={{.TAG}}" ./cmd/fname
+      - go install -v -ldflags "-w -s -X main.version={{.TAG}}" ./cmd/fnombre
   lint:
     desc: Runs golangci-lint
     cmds:

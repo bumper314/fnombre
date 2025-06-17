@@ -1,4 +1,4 @@
-package fname
+package fnombre
 
 import "testing"
 
